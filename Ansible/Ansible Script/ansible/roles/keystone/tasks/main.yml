@@ -1,0 +1,17 @@
+---
+- name: install keystone
+  apt: name=keystone state=present update_cache=yes
+
+- name: copy keystone.conf
+  template: src=etc/keystone/keystone.conf.j2 dest=/etc/keystone/keystone.conf
+  notify:
+    - restart keystone
+
+- name: purge expired tokens
+  shell: "(crontab -l -u keystone 2>&1 | grep -q token_flush) || echo '@hourly /usr/bin/keystone-manage token_flush >/var/log/keystone/keystone-tokenflush.log 2>&1' >> /var/spool/cron/crontabs/keystone"
+
+- name: Make sure KEYSTONE is started up
+  service: name=keystone state=started enabled=yes
+
+- name: Synchronizing Keystone Database
+  shell: "keystone-manage db_sync"

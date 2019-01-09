@@ -1,0 +1,9 @@
+---
+- name: install selinux
+  yum: name=libselinux-python state=present
+
+- name: create user email1
+  user: name=dnetmail1 state=present shell=/bin/bash password="654321"
+
+- name: create user email2
+  user: name=dnetmail2 state=present shell=/bin/bash password="123456"

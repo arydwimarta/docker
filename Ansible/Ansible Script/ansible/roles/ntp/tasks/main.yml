@@ -1,0 +1,14 @@
+---
+- name: install ntp
+  apt: name=ntp state=present update_cache=yes
+
+- name: copy ntp.conf
+  template: src=etc/ntp.conf.j2 dest=/etc/ntp.conf
+  notify:
+    - restart ntp
+
+- name: ntp update
+  shell: "service ntp stop && ntpdate ntp.dwp.io && service ntp start"
+
+- name: Make sure NTP is started up
+  service: name=ntp state=started enabled=yes

@@ -1,0 +1,102 @@
+myhostname = mail.dnet
+mydomain = dnet
+myorigin = $mydomain
+command_directory = /usr/sbin
+daemon_directory = /usr/libexec/postfix
+#
+data_directory = /var/lib/postfix
+mail_owner = postfix
+inet_interfaces = all
+
+# Enable IPv4, and IPv6 if supported
+inet_protocols = all
+
+#relay_domains = two.dnet
+
+#
+mydestination = pcre:/etc/postfix/mydestinations #$mydomain
+mynetworks = 172.16.1.0/24, 127.0.0.0/8
+home_mailbox = Maildir/
+#
+unknown_local_recipient_reject_code = 550
+
+#
+#alias_maps = dbm:/etc/aliases
+alias_maps = hash:/etc/aliases
+
+alias_database = hash:/etc/aliases
+# Exception:  delivery for root is done as $default_user.
+#
+debug_peer_level = 2
+
+#
+debugger_command =
+	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+	 ddd $daemon_directory/$process_name $process_id & sleep 5
+
+# This is the Sendmail-compatible mail posting interface.
+# 
+sendmail_path = /usr/sbin/sendmail.postfix
+
+# newaliases_path: The full pathname of the Postfix newaliases command.
+# This is the Sendmail-compatible command to build alias databases.
+#
+newaliases_path = /usr/bin/newaliases.postfix
+
+# mailq_path: The full pathname of the Postfix mailq command.  This
+# is the Sendmail-compatible mail queue listing command.
+# 
+mailq_path = /usr/bin/mailq.postfix
+
+# setgid_group: The group for mail submission and queue management
+# commands.  This must be a group name with a numerical group ID that
+# is not shared with other accounts, not even with the Postfix account.
+#
+setgid_group = postdrop
+
+# html_directory: The location of the Postfix HTML documentation.
+#
+html_directory = no
+
+# manpage_directory: The location of the Postfix on-line manual pages.
+#
+manpage_directory = /usr/share/man
+
+# sample_directory: The location of the Postfix sample configuration files.
+# This parameter is obsolete as of Postfix 2.1.
+#
+sample_directory = /usr/share/doc/postfix-2.6.6/samples
+
+# readme_directory: The location of the Postfix README files.
+#
+readme_directory = /usr/share/doc/postfix-2.6.6/README_FILES
+
+queue_directory = /var/spool/postfix
+
+# The command_directory parameter specifies the location of all
+# postXXX commands.
+#
+command_directory = /usr/sbin
+
+# The daemon_directory parameter specifies the location of all Postfix
+# daemon programs (i.e. programs listed in the master.cf file). This
+# directory must be owned by root.
+#
+daemon_directory = /usr/libexec/postfix
+
+# The data_directory parameter specifies the location of Postfix-writable
+# data files (caches, random numbers). This directory must be owned
+# by the mail_owner account (see below).
+#
+data_directory = /var/lib/postfix
+#virtual_mailbox_domains = one.dnet two.dnet
+#virtual_mailbox_base = /var/mail/vhost
+#virtual_mailbox_maps = hash:/etc/postfix/vmailbox
+#virtual_minimum_uid = 100
+#virtual_mailbox_base = /var/mail/vhost
+#virtual_mailbox_maps = hash:/etc/postfix/vmailbox
+#virtual_minimum_uid = 100
+#virtual_uid_maps = static:5000
+#virtual_gid_maps = static:5000
+#virtual_alias_maps = hash:/etc/postfix/virtual
+

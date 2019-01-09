@@ -1,0 +1,21 @@
+---
+- name: install vlan
+  apt: name=vlan state=present update_cache=yes
+
+- name: install bridge-utils
+  apt: name=bridge-utils state=present update_cache=yes
+
+- name: install neutron-plugin-ml2 neutron-plugin-openvswitch-agent dnsmasq neutron-l3-agent neutron-dhcp-agent
+  shell: "sudo apt-get install neutron-plugin-ml2 neutron-plugin-openvswitch-agent dnsmasq neutron-l3-agent neutron-dhcp-agent"
+
+- name: copy l3_agent.ini
+  template: src=etc/neutron/l3_agent.ini.j2 dest=/etc/neutron/l3_agent.ini
+
+- name: copy dhcp_agent.ini
+  template: src=etc/neutron/dhcp_agent.ini.j2 dest=/etc/neutron/dhcp_agent.ini
+
+- name: copy metadata_agent.ini
+  template: src=etc/neutron/metadata_agent.ini.j2 dest=/etc/neutron/metadata_agent.ini
+
+- name: copy ml2_conf.ini
+  template: src=etc/neutron/plugins/ml2/ml2.ini.j2 dest=/etc/neutron/plugins/ml2/ml2_conf.ini

@@ -1,0 +1,7 @@
+---
+- name: installing dovecot
+  yum: name=dovecot state=present
+
+- name: config dovecot
+  template: src=etc/dovecot/dovecot.conf.j2 dest=/etc/dovecot.conf
+  notify: restart dovecot

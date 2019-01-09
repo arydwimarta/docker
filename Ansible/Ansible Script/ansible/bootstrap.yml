@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: true
+  sudo: true
+  remote_user: root
+  roles:
+    - { role: manage-user,
+        user: { name: ary } }
+    - { role: manage-user,
+        user: { name: luqman } }
+    - { role: manage-user,
+        user: { name: andy.pranata } }
+    - { role: manage-user,
+        user: { name: andi.wirawan } }
+    - { role: manage-user,
+        user: { name: henry.purnama } }
+    - { role: manage-user,
+        user: { name: chika } }

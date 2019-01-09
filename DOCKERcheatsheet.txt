@@ -1,0 +1,3 @@
+
+#mount semua file untuk update perubahan file secara realtime
+docker run -p 2929:80 -v /home/ary/Docker/latihan/src/:/var/www/html/ hello-word

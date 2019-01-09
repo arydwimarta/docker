@@ -1,0 +1,13 @@
+
+docker-compose up -d --build
+
+docker build -t swagger .
+
+docker run -d -p 81:8080 imagename
+
+docker run -i -t --entrypoint /bin/bash <imageID>
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq

@@ -1,0 +1,17 @@
+---
+- hosts: openstack-sa
+  gather_facts: false
+  sudo: true
+  remote_user: ary
+  roles:
+#     - copyfile
+#     - apt
+#     - ntp
+     - mysql
+#     - rabbitmq
+#     - keystone
+#     - glance
+#     - nova
+#     - neutron
+#     - openstack-dashboard
+#     - network-node

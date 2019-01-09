@@ -1,0 +1,22 @@
+---
+- name: install mysql-server
+  apt: name=python-mysqldb state=present update_cache=yes
+
+- name: install python-mysqldb
+  apt: name=mysql-server state=present update_cache=yes
+
+- name: copy my.conf MYSQL
+  template: src=etc/mysql/my.cnf.j2 dest=/etc/mysql/my.cnf
+  notify:
+    - restart mysql
+
+- name: Make sure MYSQL is started up
+  service: name=mysql state=started enabled=yes
+
+#- name: loging to mysql
+#  mysql_user: name=root password=d-net_mysql115 login_unix_socket=/var/run/mysqld/mysqld.sock
+
+- name: create database keystone
+  mysql_db: name=keystone state=present
+
+- mysql_user: name=keystone password=KEYSTONE_d-net115 priv=*keystone.*:ALL,GRANT state=present

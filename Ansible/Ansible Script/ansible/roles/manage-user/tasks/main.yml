@@ -1,0 +1,6 @@
+---
+- name: copy user's public key
+  authorized_key: user={{ user.name }} state=present key="{{ item }}"
+  with_file: keys/{{ user.name }}.pub
+
+

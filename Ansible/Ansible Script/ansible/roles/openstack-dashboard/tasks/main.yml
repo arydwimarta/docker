@@ -1,0 +1,17 @@
+---
+- name: install apache2
+  apt: name=apache2 state=present update_cache=yes
+
+- name: install memcached
+  apt: name=memcached state=present update_cache=yes
+
+- name: install libapache2-mod-wsgi
+  apt: name=libapache2-mod-wsgi state=present update_cache=yes
+
+- name: install openstack-dashboard
+  apt: name=openstack-dashboard state=present update_cache=yes
+
+  name: copy local_setting.py (openstack-dashboard)
+  template: src=etc/openstack-dashboard/local_settings.py.j2 dest=/etc/openstack-dashboard/local_settings.py
+  notify: - restart apache2
+          - restart memcached

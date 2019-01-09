@@ -1,0 +1,7 @@
+---
+- name: installing postfix
+  yum: name=postfix state=present
+
+- name: config postfix
+  template: src=etc/postfix/main.cf.j2 dest=/etc/postfix/main.cf
+  notify: restart postfix

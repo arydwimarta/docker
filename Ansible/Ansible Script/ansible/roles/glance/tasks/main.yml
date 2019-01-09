@@ -1,0 +1,20 @@
+---
+- name: install glance
+  apt: name=glance state=present update_cache=yes
+
+- name: install python-glanceclient
+  apt: name=python-glanceclient state=present update_cache=yes
+
+- name: copy glance-registry.conf
+  template: src=etc/glance/glance-registry.conf.j2 dest=/etc/glance/glance-registry.conf
+
+- name: copy glance-api.conf
+  template: src=etc/glance/glance-api.conf.j2 dest=/etc/glance/glance-api.conf
+  notify: restart glance-api
+          restart glance-registry
+
+- name: Make sure glance-api is started up
+  service: name=glance-api state=started enabled=yes
+
+- name: Make sure glance-registry is started up
+  service: name=glance-registry state=started enabled=yes

@@ -1,0 +1,5 @@
+- name: copy host.conf
+  template: src=etc/hosts.j2 dest=/etc/hosts
+
+- name: copy admin_script.sh
+  template: src=etc/admin_script.sh.j2 dest=/home/admin_script.sh

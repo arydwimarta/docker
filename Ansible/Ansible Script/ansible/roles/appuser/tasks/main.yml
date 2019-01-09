@@ -1,0 +1,20 @@
+---
+- name: create groups engineer
+  group: name=engineer state=present
+- name: create file engineer
+  template: src=etc/sudoers.d/engineer.j2 dest=/etc/sudoers.d/engineer mode=0440
+- name: add saveral user
+  user: name={{ item }} state=present groups=engineer shell=/bin/bash
+  with_items:
+      - ary
+      - luqman
+      - andy.pranata
+      - andi.wirawan
+      - henry
+      - chika
+- name: delete user
+  user: name={{ item }} state=absent remove=yes
+  with_items:
+      - alfian
+      - david
+      - angga

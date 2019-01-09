@@ -1,0 +1,23 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	60
+@	IN	SOA	dnet. root.dnet. (
+			      15		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 5 )	; Negative Cache TTL
+;
+@	IN	NS	dnet.
+;dnet.	IN	A	172.16.1.9
+@	IN	AAAA	::1
+@	IN	A	172.16.1.8
+;@	IN	CNAME	mail.dnet.
+@	IN	MX	10 mail.dnet.
+;mail	IN	A	172.16.1.8
+
+;mail.one.dnet.	IN	A	172.16.1.8
+;mail.two.dnet.	IN	A	172.16.1.8
+;one.dnet. IN	MX	10 mail.one.dnet.
+;two.dnet. IN	MX	10 mail.two.dnet.

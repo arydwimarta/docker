@@ -1,0 +1,20 @@
+---
+users:
+  - name: ary
+  - authorized:
+     - /tmp/ary/id_rsa.pub
+  - name: luqman
+  - authorized:
+     - /tmp/luqman/id_rsa.pub
+  - name: andy.pranata
+  - authorized:
+     - /tmp/andy.pranata/id_rsa.pub
+  - name: andi.wirawan
+  - authorized:
+     - /tmp/andi.wirawan/id_rsa.pub
+  - name: henry.purnama
+  - authorized:
+     - /tmp/henry.purnama/id_rsa.pub
+  - name: chika
+  - authorized:
+     - /tmp/chika/id_rsa.pub

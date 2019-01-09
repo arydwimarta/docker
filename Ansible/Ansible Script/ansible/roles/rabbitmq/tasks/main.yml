@@ -1,0 +1,11 @@
+---
+- name: install rabbitmq-server
+  apt: name=rabbitmq-server state=present update_cache=yes
+  notify:
+    - restart rabbitmq-server
+
+#- name: change password rabbitmq
+#  shell: "rabbitmqctl change_password guest RABBIT_PASS"
+
+- name: Make sure RabbitMQ is started up
+  service: name=rabbitmq-server state=started enabled=yes

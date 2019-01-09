@@ -1,0 +1,16 @@
+---
+- hosts: dns
+  gather_facts: false
+  sudo: true
+  remote_user: root
+  roles:
+    - bind
+
+- hosts: mailserver
+  gather_facts: false
+  sudo: true
+  remote_user: root
+  roles:
+    - appuser
+    - postfix
+    - dovecot

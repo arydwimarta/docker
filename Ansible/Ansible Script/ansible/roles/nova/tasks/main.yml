@@ -1,0 +1,50 @@
+---
+- name: install nova-api
+  apt: name=nova-api state=present update_cache=yes
+
+- name: install nova-cert
+  apt: name=nova-cert state=present update_cache=yes
+
+- name: install nova-conductor
+  apt: name=nova-conductor state=present update_cache=yes
+
+- name: install nova-consoleauth
+  apt: name=nova-consoleauth state=present update_cache=yes
+
+- name: install nova-novncproxy
+  apt: name=nova-novncproxy state=present update_cache=yes
+
+- name: install nova-scheduler
+  apt: name=nova-scheduler state=present update_cache=yes
+
+- name: install python-novaclient
+  apt: name=python-novaclient state=present update_cache=yes
+
+- name: copy nova.conf
+  template: src=etc/nova/nova.conf.j2 dest=/etc/nova/nova.conf
+  notify:
+    - restart nova-api
+    - restart nova-cert
+    - restart nova-conductor
+    - restart nova-consoleauth
+    - restart nova-novncproxy
+    - restart nova-scheduler
+
+- name: Make sure nova-api is started up
+  service: name=nova-api state=started enabled=yes
+
+- name: Make sure nova-cert is started up
+  service: name=nova-cert state=started enabled=yes
+
+- name: Make sure nova-conductor is started up
+  service: name=nova-conductor state=started enabled=yes
+
+- name: Make sure nova-consoleauth is started up
+  service: name=nova-consoleauth state=started enabled=yes
+
+- name: Make sure nova-novncproxy is started up
+  service: name=nova-novncproxy state=started enabled=yes
+
+- name: Make sure nova-scheduler is started up
+  service: name=nova-scheduler state=started enabled=yes
+

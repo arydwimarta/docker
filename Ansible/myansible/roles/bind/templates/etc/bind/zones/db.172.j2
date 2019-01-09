@@ -1,0 +1,17 @@
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	dnet. root.dnet. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+
+@	IN	NS	dnet.
+
+;dnet.	IN 	A	172.16.1.8
+8	IN	PTR	one.dnet.
+8	IN	PTR	two.dnet.

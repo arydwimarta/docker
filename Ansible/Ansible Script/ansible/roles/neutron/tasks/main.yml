@@ -1,0 +1,28 @@
+---
+- name: install neutron-server
+  apt: name=neutron-server state=present update_cache=yes
+
+- name: install neutron-plugin-ml2
+  apt: name=neutron-plugin-ml2 state=present update_cache=yes
+
+- name: copy neutron.conf
+  template: src=etc/neutron/neutron.conf.j2 dest=/etc/neutron/neutron.conf.conf
+
+- name: copy ml2_conf.ini
+  template: src=etc/neutron/plugins/ml2/ml2_conf.ini.j2 dest=/etc/neutron/plugins/ml2/ml2_conf.ini
+  notify: restart nova-api
+          restart nova-scheduler
+          restart nova-conductor
+          restart neutron-server
+
+- name: Make sure nova-api is started up
+  service: name=nova-api state=started enabled=yes
+
+- name: Make sure nova-scheduler is started up
+  service: name=nova-scheduler state=started enabled=yes
+
+- name: Make sure nova-conductor is started up
+  service: name=nova-conductor state=started enabled=yes
+
+- name: Make sure neutron-server is started up
+  service: name=neutron-server state=started enabled=yes

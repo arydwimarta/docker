@@ -1,0 +1,27 @@
+---
+- name: install bind9
+  apt: name=bind9 state=present
+
+- name: create zones folder
+  file: dest=/etc/bind/zones
+        state=directory
+        mode=0755
+        owner=root
+        group=root
+
+- name: configuring zone
+  template: src=etc/bind/named.conf.local.j2 dest=/etc/bind/named.conf.local
+
+- name: add db.dnet zone file
+  template: src=etc/bind/zones/db.dnet.j2 dest=/etc/bind/zones/db.dnet
+
+- name: add db.one.dnet zone file
+  template: src=etc/bind/zones/db.one.dnet.j2 dest=/etc/bind/zones/db.one.dnet
+
+- name: add db.two.dnet zone file
+  template: src=etc/bind/zones/db.two.dnet.j2 dest=/etc/bind/zones/db.two.dnet
+  notify: restart bind
+
+- name: check bind9 service
+  service: name=bind9 state=restarted
+#  notify: restart bind
